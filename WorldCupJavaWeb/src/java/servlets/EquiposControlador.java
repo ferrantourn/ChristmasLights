@@ -41,6 +41,7 @@ public class EquiposControlador extends HttpServlet {
         
         String accion= null,metodo;
         try {
+            
             equipoLogica = FabricaLogica.getEquiposLogica();
             
             LoadmvEquipo(request);

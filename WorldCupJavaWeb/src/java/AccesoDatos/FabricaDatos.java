@@ -21,5 +21,14 @@ public class FabricaDatos  {
     {
         return EstadioDatos.getInstancia();
     }
+    
+    public static IUsuarioDatos getUsuarioDatos ()
+    {
+        return UsuarioDatos.getInstancia();
+    }
    
+    public static IReservaDatos getReservaDatos ()
+    {
+        return ReservaDatos.getInstancia();
+    }
 }

@@ -1,6 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS `2014worldcup` DEFAULT CHARACTER SET utf8 ;
 USE `2014worldcup`;
 
+DROP TABLE IF exists `2014worldcup`.`reservas` ;
 DROP TABLE IF exists `2014worldcup`.`goles` ;
 DROP TABLE IF EXISTS `2014worldcup`.`partido` ;
 DROP TABLE IF EXISTS `2014worldcup`.`estadio` ;
@@ -16,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `2014worldcup`.`usuario` (
     `Ci` INT(11) NOT NULL,
 	`Nombre` varchar(50) NOT NULL,
 	`Apellido` varchar(50) NOT NULL,
-	`Administrador` BIT NOT NULL,
+	`TipoUsuario` varchar(50) NOT NULL,
 	`Usuario` varchar(50) NOT NULL,
 	`Password` varchar(50) NOT NULL,
     PRIMARY KEY (`Ci`)
@@ -63,6 +64,8 @@ CREATE TABLE IF NOT EXISTS `2014worldcup`.`jugador` (
 	REFERENCES equipo(IdEquipo)
 )  ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
+
+
 CREATE TABLE IF NOT EXISTS `2014worldcup`.`partido` (
     `IdPartido` INT(11) NOT NULL AUTO_INCREMENT,
     `Fecha` DATETIME NOT NULL,
@@ -91,11 +94,26 @@ CREATE TABLE IF NOT EXISTS `2014worldcup`.`goles` (
 	REFERENCES partido(IdPartido)
 )  ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
+
+CREATE TABLE IF NOT EXISTS `2014worldcup`.`reservas` (
+	`IdReserva` INT(11) NOT NULL AUTO_INCREMENT,
+    `IdPartido` INT(11) NOT NULL,
+    `ci` INT(11) NOT NULL,
+    PRIMARY KEY (`IdReserva`),
+	CONSTRAINT fk_reservasPartido FOREIGN KEY (IdPartido)
+	REFERENCES partido(IdPartido),
+	CONSTRAINT fk_reservasUsuario FOREIGN KEY (ci)
+	REFERENCES usuario(ci)
+)  ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+
 USE `2014worldcup` ;
 
 -- INSERT USUARIOS
-INSERT INTO USUARIO (Ci, Nombre, Apellido, Administrador,Usuario, Password) VALUES (78541125,'Yanick','Tourn',0,'yanick','1234');
-INSERT INTO USUARIO (Ci, Nombre, Apellido, Administrador,Usuario, Password) VALUES (54852215,'Amalfi','Marini',1,'amalfi','1234');
+INSERT INTO USUARIO (Ci, Nombre, Apellido, TipoUsuario,Usuario, Password) VALUES (12345678,'Yanick','Tourn','Usuario','yanick','1234');
+INSERT INTO USUARIO (Ci, Nombre, Apellido, TipoUsuario,Usuario, Password) VALUES (54852215,'Amalfi','Marini','Administrador','amalfi','1234');
+INSERT INTO USUARIO (Ci, Nombre, Apellido, TipoUsuario,Usuario, Password) VALUES (78541268,'Mario','Regueiro','Vendedor','mario','1234');
+
 
 -- EQUIPOS
 INSERT INTO equipo (Pais, Entrenador, CabezaSerie) VALUES ('Uruguay','Maestro Tabarez', 1);

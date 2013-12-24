@@ -13,7 +13,7 @@ public class Usuario {
     private String apellido;
     private String usuario;
     private String password;
-    private boolean administrador;
+    private String tipoUsuario;
     private long ci;
 
     /**
@@ -48,7 +48,7 @@ public class Usuario {
      * @return the usuario
      */
     public String getUsuario() {
-        return usuario;
+        return this.usuario;
     }
 
     /**
@@ -72,18 +72,14 @@ public class Usuario {
         this.password = password;
     }
 
-    /**
-     * @return the administrador
-     */
-    public boolean isAdministrador() {
-        return administrador;
+    
+    public String getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    /**
-     * @param administrador the administrador to set
-     */
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
+   
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     /**
@@ -105,9 +101,9 @@ public class Usuario {
        
     }
     
-    public Usuario (String _nombre, String _apellido, String _usuario, String _password, boolean _admin)
+    public Usuario (String _nombre, String _apellido, String _usuario, String _password, String _tipoUsuario)
     {
-        setAdministrador(_admin);
+        setTipoUsuario(_tipoUsuario);
         setApellido(_apellido);
         setNombre(_nombre);
         setUsuario(_usuario);

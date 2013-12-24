@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>filtros.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>EquiposControlador</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>EstadiosControlador</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>HomeControlador</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>EquiposControlador</servlet-name>
         <servlet-class>servlets.EquiposControlador</servlet-class>
@@ -7,7 +23,15 @@
     <servlet>
         <servlet-name>EstadiosControlador</servlet-name>
         <servlet-class>servlets.EstadiosControlador</servlet-class>
-        <multipart-config></multipart-config>
+        <multipart-config/>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeControlador</servlet-name>
+        <servlet-class>servlets.HomeControlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReservasControlador</servlet-name>
+        <servlet-class>servlets.ReservasControlador</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EquiposControlador</servlet-name>
@@ -24,6 +48,14 @@
     <servlet-mapping>
         <servlet-name>EstadiosControlador</servlet-name>
         <url-pattern>/ListarEstadios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeControlador</servlet-name>
+        <url-pattern>/Home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReservasControlador</servlet-name>
+        <url-pattern>/ReservaEntradas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

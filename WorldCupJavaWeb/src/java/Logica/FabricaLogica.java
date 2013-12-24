@@ -21,4 +21,9 @@ public class FabricaLogica {
     {
         return EstadioLogica.getInstancia();
     }
+    
+    public static IUsuarioLogica getUsuarioLogica ()
+    {
+        return UsuarioLogica.getInstancia();
+    }
 }
