@@ -20,8 +20,8 @@
             <table>
                 <tr>
                     <td>Seleccione partido</td><td><select id="ddlPartidos" name="ddlPartidos">
-                            <c:forEach items="${estadios}" var="e">
-                                <option value="${e.idEstadio}">${e.nombreEstadio}</option></c:forEach>
+                            <c:forEach items="${partidos}" var="p">
+                                <option value="${p.idPartido}">${p.idPartido}</option></c:forEach>
                             </select></td>
                     </tr>
                     <tr>
@@ -32,8 +32,9 @@
                     </tr>
                 </table>
             </form>
-        <c:if test="${reserva.idReserva != null}">
+        <c:if test="${reserva.idReserva != null && reserva.idReserva != 0}">
             <p>Su numero de reserva es: &nbsp; ${reserva.idReserva}</p>
+            <p>Guarde este numero para su futura referencia.</p>
         </c:if>           
         <div style="clear:both; height:20px" />
         <p>${modelo.mensaje}</p>

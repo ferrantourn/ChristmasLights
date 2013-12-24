@@ -85,7 +85,6 @@ public class EquiposControlador extends HttpServlet {
             request.setAttribute("modelo", modelo);
         }
         finally {
-            
             String vista = "WEB-INF/Vistas/";
             vista += ("".equals(accion)) ? "ListarEquipos.jsp" : "Equipo.jsp";
             RequestDispatcher despachador = request.getRequestDispatcher(vista);

@@ -13,9 +13,21 @@ import java.util.Date;
 public class Partido {
     private int idPartido;
     private Equipo[] equipos = new Equipo[2];
-   
     private Date Fecha;
+    private int idEstadio;
     
+    public Partido (int idPartido, Equipo[] equipos, Date f, int idEstadio)
+    {
+        setIdPartido(idPartido);
+        setEquipos(equipos);
+        setFecha(Fecha);
+        setIdEstadio(idEstadio);
+    }
+    
+    public Partido ()
+    {
+        
+    }
 
     /**
      * @return the equipos
@@ -28,7 +40,7 @@ public class Partido {
      * @param equipos the equipos to set
      */
     public void setEquipos(Equipo[] equipos) {
-        this.equipos = equipos;
+        this.equipos= equipos;
     }
 
     
@@ -59,5 +71,20 @@ public class Partido {
      */
     public void setIdPartido(int idPartido) {
         this.idPartido = idPartido;
+    }
+
+    
+    /**
+     * @return the idEstadio
+     */
+    public int getIdEstadio() {
+        return idEstadio;
+    }
+
+    /**
+     * @param idEstadio the idEstadio to set
+     */
+    public void setIdEstadio(int idEstadio) {
+        this.idEstadio = idEstadio;
     }
 }

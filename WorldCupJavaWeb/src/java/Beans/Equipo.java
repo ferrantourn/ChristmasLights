@@ -23,6 +23,10 @@ public class Equipo {
         setPais(Ppais);   
     }
 
+    public Equipo (int idEquipo){
+        setIdEquipo(idEquipo);
+    }
+    
     /**
      * @return the nombre
      */

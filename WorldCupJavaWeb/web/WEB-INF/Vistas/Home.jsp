@@ -23,7 +23,7 @@
                 <p><a href="/WorldCupJavaWeb/" >Consulta de reservas</a></p>
             </c:when>    
             <c:when test="${usuario.tipoUsuario.equalsIgnoreCase('USUARIO')}">
-                <p><a href="/WorldCupJavaWeb/" >Reserva de entradas</a></p>
+                <p><a href="/WorldCupJavaWeb/ReservaEntradas" >Reserva de entradas</a></p>
             </c:when>
         </c:choose>
         <p><a href="/WorldCupJavaWeb/" >Partidos ya jugados</a></p>

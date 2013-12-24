@@ -51,7 +51,7 @@ public class EquiposLogica implements IEquiposLogica {
     {
         try
         {
-             IEquiposDatos datos = FabricaDatos.getEquiposDatos();
+            IEquiposDatos datos = FabricaDatos.getEquiposDatos();
             datos.EliminarEquipo(e);
         }
         catch (Exception ex)

@@ -31,4 +31,9 @@ public class FabricaDatos  {
     {
         return ReservaDatos.getInstancia();
     }
+    
+    public static IPartidosDatos getPartidosDatos ()
+    {
+        return PartidosDatos.getInstancia();
+    }
 }

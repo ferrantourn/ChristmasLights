@@ -26,4 +26,13 @@ public class FabricaLogica {
     {
         return UsuarioLogica.getInstancia();
     }
+    public static IReservaLogica getReservaLogica ()
+    {
+        return ReservaLogica.getInstancia();
+    }
+    
+     public static IPartidosLogica getPartidosLogica ()
+    {
+        return PartidosLogica.getInstancia();
+    }
 }

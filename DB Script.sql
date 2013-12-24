@@ -137,10 +137,18 @@ INSERT INTO equipo (Pais, Entrenador, CabezaSerie) VALUES ('Bosnia-Herzegovina',
 INSERT INTO equipo (Pais, Entrenador, CabezaSerie) VALUES ('Iran','Carlos Queiroz', 0);
 INSERT INTO equipo (Pais, Entrenador, CabezaSerie) VALUES ('Nigeria','Stephen Keshi', 0);
 
-
+-- ESTADIOS
 INSERT INTO estadio (NombreEstadio, Capacidad, TipoCesped) VALUES ('Arena Pernambuco', 46154,'Natural');
 INSERT INTO estadio (NombreEstadio, Capacidad, TipoCesped) VALUES ('Estadio Nacional (Brasilia)', 46154,'Natural');
 INSERT INTO estadio (NombreEstadio, Capacidad, TipoCesped) VALUES ('Arena Amazonia (Manaos)', 46154,'Natural');
 INSERT INTO estadio (NombreEstadio, Capacidad, TipoCesped) VALUES ('Beira-Rio', 46154,'Natural');
 INSERT INTO estadio (NombreEstadio, Capacidad, TipoCesped) VALUES ('Fonte Nova', 46154,'Natural');
+
+-- PARTIDOS
+INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-24', 1,1,2);
+INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-25', 1,3,4);
+INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-24', 1,5,6);
+INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-25', 1,7,8);
+
+
 
