@@ -17,6 +17,10 @@ public class Jugador {
     private String Posicion;
     private Equipo EquipoPertenece;
 
+    public Jugador(int IdJugador, String nombre, String apellido, String posicion, Equipo equipoAux) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * @return the IdJugador
      */
