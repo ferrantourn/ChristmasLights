@@ -20,9 +20,9 @@ import java.util.ArrayList;
  * @author Ferran
  */
 public class EstadioDatos implements IEstadioDatos {
-    private static final String URL_CONEXION = "jdbc:mysql://localhost:3306/2014worldcup";
-    private static final String NOMBRE_USUARIO_BASE_DATOS = "root";
-    private static final String CONTRASENA_BASE_DATOS = "1qaz2WSX";
+    private static final String URL_CONEXION = AccesoBD.URL_CONEXION;
+    private static final String NOMBRE_USUARIO_BASE_DATOS = AccesoBD.NOMBRE_USUARIO_BASE_DATOS;
+    private static final String CONTRASENA_BASE_DATOS = AccesoBD.contrasena_BD;
     
     private static EstadioDatos instancia = null;
     

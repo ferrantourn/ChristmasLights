@@ -20,9 +20,9 @@ import java.util.ArrayList;
  */
 public class EquipoDatos implements IEquiposDatos{
     
-    private static final String URL_CONEXION = "jdbc:mysql://localhost:3306/2014worldcup";
-    private static final String NOMBRE_USUARIO_BASE_DATOS = "root";
-    private static final String CONTRASENA_BASE_DATOS = "1qaz2WSX";
+    private static final String URL_CONEXION = AccesoBD.URL_CONEXION;
+    private static final String NOMBRE_USUARIO_BASE_DATOS = AccesoBD.NOMBRE_USUARIO_BASE_DATOS;
+    private static final String CONTRASENA_BASE_DATOS = AccesoBD.contrasena_BD;
     
     private static EquipoDatos instancia = null;
     
