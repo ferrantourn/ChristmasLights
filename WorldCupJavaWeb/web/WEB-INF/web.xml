@@ -16,6 +16,10 @@
         <filter-name>LoginFilter</filter-name>
         <servlet-name>HomeControlador</servlet-name>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>ReservasControlador</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>EquiposControlador</servlet-name>
         <servlet-class>servlets.EquiposControlador</servlet-class>
@@ -61,6 +65,10 @@
     <servlet-mapping>
         <servlet-name>ReservasControlador</servlet-name>
         <url-pattern>/ReservaEntradas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReservasControlador</servlet-name>
+        <url-pattern>/ConsultaReservas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

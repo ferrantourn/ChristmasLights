@@ -87,6 +87,21 @@ public class ReservasControlador extends HttpServlet {
                 
                 request.setAttribute("reserva", r);
             }
+            else if (accion != null && accion.equalsIgnoreCase("BUSCAR"))
+            {
+                reservaLogica = FabricaLogica.getReservaLogica();
+                
+                Long ci;
+                
+                try {
+                    ci = Long.parseLong(request.getParameter("txtCedula"));
+                }
+                catch (NumberFormatException ex) {
+                    throw new Exception("El valor de la cedula no es válido.");
+                }
+                
+                reservaLogica.
+            }
             
             
         }

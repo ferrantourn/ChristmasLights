@@ -6,6 +6,7 @@
 
 package AccesoDatos;
 
+import Beans.Equipo;
 import Beans.Reserva;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -97,6 +98,68 @@ public class ReservaDatos implements IReservaDatos {
                 
                 if (st != null) {
                     st.close();
+                }
+                
+                if (con != null) {
+                    con.close();
+                }
+            }
+            catch (SQLException ex) {
+                throw ex;
+            }
+        }
+    }
+    
+    @Override
+    public Reserva BuscarReserva(Reserva r) throws Exception
+    {
+        Connection con = null;
+        PreparedStatement statement = null;
+        ResultSet resultadoConsulta = null;
+        
+        try {
+            con = GetConnection();
+            
+            statement = con.prepareStatement("SELECT r.IdReserva,r.Ci, r.IdPartido," +
+                    "p.Fecha,p.IdEstadio,p.IdEquipo1,p.IdEquipo2,e1.Pais,e1.Entrenador,e1.CabezaSerie," +
+                    "e2.Pais,e2.Entrenador,e2.CabezaSerie" +
+                    "FROM reservas r" +
+                    "INNER JOIN Partido p on p.IdPartido = r.IdPartido" +
+                    "INNER JOIN Equipo e1 on e1.IdEquipo = p.IdEquipo1" +
+                    "INNER JOIN Equipo e2 on e2.IdEquipo = p.IdEquipo2" +
+                    "WHERE r.IdReserva = ?");
+            
+            statement.setInt(1, r.getIdReserva());
+            resultadoConsulta = statement.executeQuery();
+            
+            Reserva reserva = null;
+            
+            Integer idReserva,ci,idPartido;
+            Boolean cabezaSerie;
+            Integer idequipo;
+            
+            if (resultadoConsulta.next()) {
+                pais = resultadoConsulta.getString("Pais");
+                entrenador = resultadoConsulta.getString("Entrenador");
+                cabezaSerie = resultadoConsulta.getBoolean("CabezaSerie");
+                idequipo = resultadoConsulta.getInt("IdEquipo");
+                equipoResp = new Equipo(idequipo,pais, entrenador, cabezaSerie);
+            }
+            
+            return equipoResp;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally {
+            try {
+                if (resultadoConsulta != null) {
+                    resultadoConsulta.close();
+                }
+                
+                if (statement != null) {
+                    statement.close();
                 }
                 
                 if (con != null) {
