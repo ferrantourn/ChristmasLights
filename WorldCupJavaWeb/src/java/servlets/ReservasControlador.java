@@ -94,7 +94,7 @@ public class ReservasControlador extends HttpServlet {
                 Long ci;
                 
                 try {
-                    ci = Long.parseLong(request.getParameter("txtCedula"));
+                    ci = Long.parseLong(request.getParameter("txtReserva"));
                 }
                 catch (NumberFormatException ex) {
                     throw new Exception("El valor de la cedula no es válido.");
