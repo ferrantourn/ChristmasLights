@@ -27,7 +27,7 @@
             </c:forEach>
         </table>
         
-        <p><a href="index.jsp">Volver</a> o <a href="/WorldCupJavaWeb/Estadio?accion=nuevo" >Agregar Estadio</a></p> 
+        <p><a href="Home">Volver</a> o <a href="/WorldCupJavaWeb/Estadio?accion=nuevo" >Agregar Estadio</a></p> 
         
         <c:if test="${!empty modelo.descErrorInterno}">
             <p>Error interno: modelo.descErrorInterno</p>

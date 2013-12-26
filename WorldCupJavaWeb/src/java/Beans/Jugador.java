@@ -16,7 +16,7 @@ public class Jugador {
     private String Apellido;
     private String Posicion;
     private Equipo EquipoPertenece;
-
+    
     public Jugador(int IdJugador, String nombre, String apellido, String posicion, Equipo equipo) {
         
         this.Nombre=nombre;

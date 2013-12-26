@@ -112,7 +112,7 @@ USE `2014worldcup` ;
 -- INSERT USUARIOS
 INSERT INTO USUARIO (Ci, Nombre, Apellido, TipoUsuario,Usuario, Password) VALUES (12345678,'Yanick','Tourn','Usuario','yanick','1234');
 INSERT INTO USUARIO (Ci, Nombre, Apellido, TipoUsuario,Usuario, Password) VALUES (54852215,'Amalfi','Marini','Administrador','amalfi','1234');
-INSERT INTO USUARIO (Ci, Nombre, Apellido, TipoUsuario,Usuario, Password) VALUES (78541268,'Mario','Regueiro','Vendedor','mario','1234');
+INSERT INTO USUARIO (Ci, Nombre, Apellido, TipoUsuario,Usuario, Password) VALUES (11111111,'Mario','Regueiro','Vendedor','mario','1234');
 
 
 -- EQUIPOS
@@ -149,6 +149,14 @@ INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-24'
 INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-25', 1,3,4);
 INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-24', 1,5,6);
 INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-25', 1,7,8);
+
+-- JUGADORES
+INSERT INTO jugador (Nombre,Apellido,Posicion,IdEquipo) values ('Luis','Suarez','Delantero',1);
+INSERT INTO jugador (Nombre,Apellido,Posicion,IdEquipo) values ('Edinson','Cavani','Delantero',1);
+INSERT INTO jugador (Nombre,Apellido,Posicion,IdEquipo) values ('Francesco','Toti','Mediocampista',2);
+-- RESERVAS
+INSERT INTO reservas (IdPartido,ci) values (1,12345678)
+
 
 
 

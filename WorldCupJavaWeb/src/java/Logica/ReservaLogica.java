@@ -43,4 +43,18 @@ public class ReservaLogica implements IReservaLogica {
             throw ex;
         }
     }
+    
+     @Override
+    public Reserva BuscarReserva(Reserva r) throws Exception
+    {
+        try
+        {
+            IReservaDatos datos = FabricaDatos.getReservaDatos();
+            return datos.BuscarReserva(r);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 }

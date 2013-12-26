@@ -15,5 +15,5 @@ import Beans.Reserva;
 public interface IReservaDatos {
 
     Reserva NuevoReserva(Reserva r) throws Exception;
-    
+    Reserva BuscarReserva(Reserva r) throws Exception;
 }

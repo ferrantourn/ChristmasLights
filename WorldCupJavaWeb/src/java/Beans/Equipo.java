@@ -23,8 +23,9 @@ public class Equipo {
         setPais(Ppais);   
     }
 
-    public Equipo (int idEquipo){
+    public Equipo (int idEquipo, String pais){
         setIdEquipo(idEquipo);
+        setPais(pais);
     }
     
     /**

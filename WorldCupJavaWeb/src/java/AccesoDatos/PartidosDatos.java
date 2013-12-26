@@ -7,6 +7,7 @@
 package AccesoDatos;
 
 import Beans.Equipo;
+import Beans.Estadio;
 import Beans.Partido;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -65,28 +66,38 @@ public class PartidosDatos implements IPartidosDatos {
             {
                con = GetConnection();
                
-                //DEFINO CONSULTA
-                //---------------
-                st = con.prepareStatement("SELECT IdPartido,Fecha,IdEstadio,IdEquipo1,IdEquipo2 from partido");
-                //EJECUTO CONSULTA
-                rs = st.executeQuery();
+               //DEFINO CONSULTA
+               //---------------
+               st = con.prepareStatement("SELECT p.IdPartido,p.Fecha,p.IdEstadio,p.IdEquipo1,p.IdEquipo2," +
+                       "e1.Pais as Pais1,e2.Pais as Pais2" +
+                       " from partido p " +
+                       "INNER JOIN Equipo e1 on e1.IdEquipo = p.IdEquipo1 " +
+                       "INNER JOIN Equipo e2 on e2.IdEquipo = p.IdEquipo2 ");
+               //EJECUTO CONSULTA
+               rs = st.executeQuery();
                 
                 ArrayList<Partido> partidos = new ArrayList();
                 Partido p;
                 
                 int idEstadio,idPartido,IdEquipo1,IdEquipo2;
                 Date fecha;
+                String pais1,pais2;
                 
                 while (rs.next()) {
                     idEstadio = rs.getInt("IdEstadio");
                     idPartido = rs.getInt("IdPartido");
                     IdEquipo1 = rs.getInt("IdEquipo1");
                     IdEquipo2 = rs.getInt("IdEquipo2");
+                    pais1 = rs.getString("Pais1");
+                    pais2 = rs.getString("Pais2");
                     Equipo[] equipos = new Equipo[2];
-                    equipos[0] = new Equipo(IdEquipo1);
-                    equipos[1] = new Equipo(IdEquipo2);
+                    equipos[0] = new Equipo(IdEquipo1,pais1);
+                    equipos[1] = new Equipo(IdEquipo2,pais2);
                     fecha = rs.getDate("Fecha");
-                    p = new Partido(idPartido,equipos,fecha,idEstadio);
+                    
+                    Estadio e = new Estadio();
+                    e.setIdEstadio(idEstadio);
+                    p = new Partido(idPartido,equipos,fecha,e);
                     
                     partidos.add(p);
                 }

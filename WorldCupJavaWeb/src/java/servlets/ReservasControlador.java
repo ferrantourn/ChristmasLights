@@ -6,6 +6,7 @@
 
 package servlets;
 
+import Beans.Estadio;
 import Beans.ModeloFormBasico;
 import Beans.Partido;
 import Beans.Reserva;
@@ -20,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,17 +43,18 @@ public class ReservasControlador extends HttpServlet {
             throws ServletException, IOException {
         
         String accion = "";
+        String vista = "";
         try
         {
             Reserva r = new Reserva();
             ModeloFormBasico modelo = new ModeloFormBasico();
             request.setAttribute("reserva", r);
+            request.setAttribute("estadio", new Estadio());
+            request.setAttribute("partido", new Partido());
             request.setAttribute("modelo", modelo);
-            IPartidosLogica partidosLogica = FabricaLogica.getPartidosLogica();
             
-            ArrayList<Partido> partidos = partidosLogica.ListarPartidos();
-            request.setAttribute("partidos", partidos);
             
+                       
             accion = request.getParameter("accion");
             
             if (accion != null && accion.equalsIgnoreCase("RESERVAR"))
@@ -86,23 +89,57 @@ public class ReservasControlador extends HttpServlet {
                 r = reservaLogica.NuevoReserva(r);
                 
                 request.setAttribute("reserva", r);
+                vista = "ReservarEntradas.jsp";
             }
             else if (accion != null && accion.equalsIgnoreCase("BUSCAR"))
             {
                 reservaLogica = FabricaLogica.getReservaLogica();
                 
-                Long ci;
+                Integer idreserva;
                 
                 try {
-                    ci = Long.parseLong(request.getParameter("txtReserva"));
+                    idreserva = Integer.parseInt(request.getParameter("txtReserva"));
                 }
                 catch (NumberFormatException ex) {
-                    throw new Exception("El valor de la cedula no es válido.");
+                    throw new Exception("El identificador de reserva no es válido.");
                 }
                 
-                reservaLogica.
+                r.setIdReserva(idreserva);
+                Reserva result = reservaLogica.BuscarReserva(r);
+                
+                if (result != null)
+                {
+                    request.setAttribute("reserva", result);
+                    request.setAttribute("estadio", result.getPartido().getEstadio());
+                    request.setAttribute("partido", result.getPartido());
+                }
+                else
+                {
+                    ModeloFormBasico m = (ModeloFormBasico)request.getAttribute("modelo");
+                    m.setMensaje("No se encontro una reserva con ese número.");
+                    request.setAttribute("modelo", m);
+                    request.setAttribute("reserva", new Reserva());
+                }
+                
+                vista = "ConsultaReserva.jsp";
             }
             
+            
+                //accion llego en null
+                //------------------
+                HttpSession session = request.getSession();
+                Usuario u = (Usuario)session.getAttribute("usuario");
+                if (u.getTipoUsuario().equalsIgnoreCase("VENDEDOR"))
+                {
+                    vista = "ConsultaReserva.jsp";
+                }
+                else
+                {
+                    IPartidosLogica partidosLogica = FabricaLogica.getPartidosLogica();
+ArrayList partidos=                    partidosLogica.ListarPartidos();
+request.setAttribute("partidos", partidos);
+                    vista = "ReservaEntradas.jsp";
+                }
             
         }
         catch (Exception ex)
@@ -113,7 +150,7 @@ public class ReservasControlador extends HttpServlet {
             request.setAttribute("modelo", modelo);
         }
         finally {
-            RequestDispatcher despachador = request.getRequestDispatcher("WEB-INF/Vistas/ReservaEntradas.jsp");
+            RequestDispatcher despachador = request.getRequestDispatcher("WEB-INF/Vistas/" + vista);
             
             if (despachador != null) {
                 despachador.forward(request, response);

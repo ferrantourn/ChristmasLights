@@ -63,7 +63,7 @@ public class JugadorDatos implements IJugadorDatos {
             st.setString(1, e.getNombre());
             st.setString(2, e.getApellido());
             st.setString(3, e.getPosicion()) ;
-            st.setString(4, e.getEquipoPertenece().toString());
+            st.setInt(4, e.getEquipoPertenece().getIdEquipo());
             
             //EJECUTO CONSULTA
             int rowsModified = st.executeUpdate(); 
@@ -138,7 +138,8 @@ public class JugadorDatos implements IJugadorDatos {
         try {
             con = GetConnection();
             
-            statement = con.prepareStatement("SELECT IdJugador, Nombre, Apellido, Posicion, IdEquipo FROM jugador WHERE IdJugador = ?;");
+            statement = con.prepareStatement("SELECT IdJugador, Nombre, Apellido, Posicion, IdEquipo "
+                    + "FROM jugador WHERE IdJugador = ?;");
             
             statement.setInt(1, e.getIdJugador());
             resultadoConsulta = statement.executeQuery();
@@ -156,7 +157,8 @@ public class JugadorDatos implements IJugadorDatos {
                 posicion = resultadoConsulta.getString("Posicion");
                 equipoAux.setIdEquipo(resultadoConsulta.getInt("IdEquipo"));//cargo equipoAux con IdEquipo
                 
-                EquipoDatos datosE = null; //la fabrica instanciar.
+                
+                IEquiposDatos datosE = FabricaDatos.getEquiposDatos(); //la fabrica instanciar.
                 
                 equipoAux = datosE.BuscarEquipo(equipoAux);//cargo equipoAux con todos los datos.*/
                 
@@ -204,27 +206,33 @@ public class JugadorDatos implements IJugadorDatos {
                
                 //DEFINO CONSULTA
                //---------------
-               st = con.prepareStatement("SELECT IdJugador, Nombre, Apellido, Posicion, IdEquipo FROM jugador");
+               st = con.prepareStatement(" SELECT IdJugador, Nombre, Apellido, Posicion, e.IdEquipo, "
+                       + " e.Pais FROM jugador "
+                       + " inner join equipo e on e.IdEquipo = jugador.IdEquipo ");
+               
                //EJECUTO CONSULTA
                rs = st.executeQuery();
                
                ArrayList<Jugador> jugadores = new ArrayList();
                Jugador e;
                
-               String nombre, apellido, posicion; 
-               int IdJugador;
+               String nombre, apellido, posicion,pais; 
+               int IdJugador,IdEquipo;
                
                while (rs.next()) {
                    nombre = rs.getString("Nombre");
                    apellido = rs.getString("Apellido");
                    posicion = rs.getString("Posicion");
-                   IdJugador = rs.getInt("IdJugador");
+                   IdJugador = rs.getInt("IdJugador"); 
+                   IdEquipo = rs.getInt("IdEquipo"); 
+                   pais = rs.getString("Pais");
                    
                    Equipo equipoAux = new Equipo();
                 
-                   equipoAux.setIdEquipo(rs.getInt("IdEquipo"));//cargo equipoAux con IdEquipo
-                   EquipoDatos datosE = null; //la fabrica instanciar.
-                   equipoAux = datosE.BuscarEquipo(equipoAux);//cargo equipoAux con todos los datos.*/
+                   equipoAux.setIdEquipo(IdEquipo);//cargo equipoAux con IdEquipo
+                   equipoAux.setPais(pais);
+//                   EquipoDatos datosE = null; //la fabrica instanciar.
+//                   equipoAux = datosE.BuscarEquipo(equipoAux);//cargo equipoAux con todos los datos.*/
 
                    jugadores.add(new Jugador(IdJugador, nombre, apellido, posicion, equipoAux));
                }
@@ -280,6 +288,7 @@ public class JugadorDatos implements IJugadorDatos {
             st.setString(2, e.getApellido());
             st.setString(3, e.getPosicion());
             st.setInt(4, e.getEquipoPertenece().getIdEquipo());
+            st.setInt(5, e.getIdJugador());
             
              
              

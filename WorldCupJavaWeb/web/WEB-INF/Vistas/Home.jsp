@@ -13,14 +13,18 @@
         <title>Home</title>
     </head>
     <body>
+        <div style="width:300px;float:right"><form action="/WorldCupJavaWeb/Home" method="post" accept-charset="ISO-8859-1"><input type="submit" name="accion" value="Salir" ></form></div>
         <h1>Home</h1>
+        <h3>Bienvenido&nbsp;${usuario.usuario}</h3>
+        <div style="width:300px;float:right"></div>
         <c:choose >
             <c:when test="${usuario.tipoUsuario.equalsIgnoreCase('ADMINISTRADOR')}">
                 <p><a href="/WorldCupJavaWeb/ListarEquipos" >Equipos</a></p>
                 <p><a href="/WorldCupJavaWeb/ListarEstadios" >Estadios</a></p>
+                <p><a href="/WorldCupJavaWeb/ListarJugadores" >Jugadores</a></p>
             </c:when>
             <c:when test="${usuario.tipoUsuario.equalsIgnoreCase('VENDEDOR')}">
-                <p><a href="/WorldCupJavaWeb/ConsultaReservas" >Consulta de reservas</a></p>
+                <p><a href="/WorldCupJavaWeb/ConsultaReserva" >Consulta de reservas</a></p>
             </c:when>    
             <c:when test="${usuario.tipoUsuario.equalsIgnoreCase('USUARIO')}">
                 <p><a href="/WorldCupJavaWeb/ReservaEntradas" >Reserva de entradas</a></p>

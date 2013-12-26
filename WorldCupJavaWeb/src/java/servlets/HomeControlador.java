@@ -33,34 +33,53 @@ public class HomeControlador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String form = "";
+        String accion = "";
+        String vista = "";
        try
        {
-           //AGREGAMOS EL USUARIO A LA SESSION
-           //---------------------------------
-           Usuario u = (Usuario)request.getAttribute("usuario");
-           HttpSession session = request.getSession();
-           session.setAttribute("usuario",u);
+           accion = request.getParameter("accion");
            
-//           if (u.getTipoUsuario().equalsIgnoreCase("VENDEDOR"))
-//           {
-//               form = "HomeVendedor";
-//           }
-           
-       }
-       catch (Exception ex)
-       {
-           
-       }
-       finally {
-            
-            String vista = "WEB-INF/Vistas/Home.jsp";
+           if (accion != null && accion.equalsIgnoreCase("SALIR"))
+           {
+               //BORRAMOS EL USUARIO DE LA SESSION
+               //---------------------------------
+               HttpSession session = request.getSession();
+               session.setAttribute("usuario",null);
+               vista = "index.jsp";
+               
+               response.sendRedirect("index.jsp");
+               
+           }
+           else{
+               //AGREGAMOS EL USUARIO A LA SESSION
+               //---------------------------------
+               HttpSession session = request.getSession();
+               if ((Usuario)session.getAttribute("usuario") == null){
+                   Usuario u = (Usuario)request.getAttribute("usuario");
+                   session.setAttribute("usuario",u);
+               }
+               vista = "WEB-INF/Vistas/Home.jsp";
+                //String vista = "WEB-INF/Vistas/Home.jsp";
             //vista += ("".equals(accion)) ? "ListarEquipos.jsp" : "Home.jsp";
             RequestDispatcher despachador = request.getRequestDispatcher(vista);
             
             if (despachador != null) {
                 despachador.forward(request, response);
             }
-        }
+//           if (u.getTipoUsuario().equalsIgnoreCase("VENDEDOR"))
+//           {
+//               form = "HomeVendedor";
+//           }
+           }
+       }
+       catch (Exception ex)
+       {
+           
+       }
+//       finally {
+//            
+//           
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

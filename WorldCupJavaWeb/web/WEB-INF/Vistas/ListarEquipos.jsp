@@ -20,7 +20,7 @@
         </form>--%>
         <table>
             <tr>
-                <th><th>PAÍS</th><th>ENTRENADOR</th><th>CABEZA SERIE</th><th></th>
+                <th></th><th>PAÍS</th><th>ENTRENADOR</th><th>CABEZA SERIE</th>
             </tr>
                 
             <c:forEach items="${equipos}" var="e">
@@ -34,7 +34,7 @@
             </c:forEach>
         </table>
         
-        <p><a href="index.jsp">Volver</a> o <a href="/WorldCupJavaWeb/Equipo?accion=nuevo" >Agregar Equipo</a></p> 
+        <p><a href="Home">Volver</a> o <a href="/WorldCupJavaWeb/Equipo?accion=nuevo" >Agregar Equipo</a></p> 
         
         <c:if test="${!empty modelo.descErrorInterno}">
             <p>Error interno: modelo.descErrorInterno</p>

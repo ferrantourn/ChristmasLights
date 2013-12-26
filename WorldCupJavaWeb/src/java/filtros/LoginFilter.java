@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -53,10 +54,11 @@ public class LoginFilter implements Filter {
         
         ModeloFormBasico  modelo = new ModeloFormBasico();
         PrintWriter out= response.getWriter();  
+        HttpServletResponse res = (HttpServletResponse) response;
         try
         {
             HttpServletRequest req = (HttpServletRequest) request;
-            //HttpServletResponse res = (HttpServletResponse) response;
+           
             HttpSession s = req.getSession();
                   
             Usuario u = (Usuario)s.getAttribute("usuario");
@@ -89,14 +91,23 @@ public class LoginFilter implements Filter {
                     else
                     {
                         //modelo.setMensaje("Usuario o contraseña incorrectos.");
-                        request.setAttribute("error", "Usuario o contraseña incorrectos.");
+                        //request.setAttribute("error", "Usuario o contraseña incorrectos.");
                         
                         //out.print("Usuario o contraseña incorrectos.");
-                        RequestDispatcher despachador = request.getRequestDispatcher("");
+                        RequestDispatcher despachador = request.getRequestDispatcher("LoginFailed.html");
                         
-                        despachador.include(request, response); 
+                        despachador.forward(request, response);
                     }
                 }
+                else
+                {
+                    res.sendRedirect("index.jsp");
+                }
+            }
+            else
+            {
+                //el usuario esta logueado
+                chain.doFilter(request,response);
             }
             
         }
@@ -105,6 +116,10 @@ public class LoginFilter implements Filter {
             //modelo = (ModeloFormBasico)request.getAttribute("modelo");
             modelo.setMensaje("Error: Se produjo un error al hacer login.");
             modelo.setDescErrorInterno(ex.getMessage());
+            request.setAttribute("modelo", modelo);
+           RequestDispatcher despachador = request.getRequestDispatcher("error.jsp");
+                        
+           despachador.forward(request, response);
         }
         finally
         {

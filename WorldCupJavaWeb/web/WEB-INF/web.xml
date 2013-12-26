@@ -20,14 +20,17 @@
         <filter-name>LoginFilter</filter-name>
         <servlet-name>ReservasControlador</servlet-name>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>JugadorControlador</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>EquiposControlador</servlet-name>
         <servlet-class>servlets.EquiposControlador</servlet-class>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>JugadorControlador</servlet-name>
         <servlet-class>servlets.JugadorControlador</servlet-class>
-        <multipart-config/>
     </servlet>
     <servlet>
         <servlet-name>EstadiosControlador</servlet-name>
@@ -68,7 +71,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ReservasControlador</servlet-name>
-        <url-pattern>/ConsultaReservas</url-pattern>
+        <url-pattern>/ConsultaReserva</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JugadorControlador</servlet-name>
+        <url-pattern>/Jugador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JugadorControlador</servlet-name>
+        <url-pattern>/ListarJugadores</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

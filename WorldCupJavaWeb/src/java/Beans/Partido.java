@@ -14,14 +14,14 @@ public class Partido {
     private int idPartido;
     private Equipo[] equipos = new Equipo[2];
     private Date Fecha;
-    private int idEstadio;
+    private Estadio estadio;
     
-    public Partido (int idPartido, Equipo[] equipos, Date f, int idEstadio)
+    public Partido (int idPartido, Equipo[] equipos, Date f, Estadio estadio)
     {
         setIdPartido(idPartido);
         setEquipos(equipos);
         setFecha(Fecha);
-        setIdEstadio(idEstadio);
+        setEstadio(estadio);
     }
     
     public Partido ()
@@ -77,14 +77,12 @@ public class Partido {
     /**
      * @return the idEstadio
      */
-    public int getIdEstadio() {
-        return idEstadio;
+    public Estadio getEstadio() {
+        return estadio;
     }
 
-    /**
-     * @param idEstadio the idEstadio to set
-     */
-    public void setIdEstadio(int idEstadio) {
-        this.idEstadio = idEstadio;
+    
+    public void setEstadio(Estadio estadio) {
+        this.estadio = estadio;
     }
 }

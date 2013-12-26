@@ -1,17 +1,15 @@
 package servlets;
 
 import Beans.Equipo;
+import Beans.Estadio;
 import Beans.Jugador;
 import Beans.ModeloFormBasico;
 import Logica.FabricaLogica;
+import Logica.IEquiposLogica;
 import Logica.IJugadorLogica;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +32,8 @@ public class JugadorControlador extends HttpServlet {
             //cargamos el modelo de la pagina
             request.setAttribute("modelo", new ModeloFormBasico());
             request.setAttribute("jugador", new Jugador());
+            IEquiposLogica equiposLogica = FabricaLogica.getEquiposLogica();
+            request.setAttribute("equipos",equiposLogica.ListarEquipos());
             
             accion = request.getParameter("accion") != null ? request.getParameter("accion").toLowerCase().replace(" ", "") : "";
             metodo = request.getMethod().toUpperCase();
@@ -69,7 +69,7 @@ public class JugadorControlador extends HttpServlet {
         }
         catch (Exception ex) {
             ModeloFormBasico modelo = (ModeloFormBasico)request.getAttribute("modelo");
-            modelo.setMensaje("Error: Se produjo un error al realizar el mantenimiento de estadios.");
+            modelo.setMensaje("Error: Se produjo un error al realizar el mantenimiento de jugadores.");
             modelo.setDescErrorInterno(ex.getMessage());
             request.setAttribute("modelo", modelo);
         }
@@ -92,19 +92,27 @@ public class JugadorControlador extends HttpServlet {
         try
         {
             String nombre, apellido, posicion;
-            Equipo equipo;
-        
+            Integer idequipo;
             nombre = request.getParameter("txtNombre");
             apellido = request.getParameter("txtApellido");
             posicion = request.getParameter("txtPosicion");
             
+            try {
+                idequipo = Integer.parseInt(request.getParameter("ddlEquipo"));
+            }
+            catch (NumberFormatException ex) {
+                throw new Exception("El equipo seleccionado no es válido.");
+            }
             //**** EQUIPO: cargarlo desde una lista
-            equipo=null;
+            //equipo=null;
+            Equipo equipo = new Equipo();
+            equipo.setIdEquipo(idequipo);
             
-            Jugador e = new Jugador(0, nombre, apellido, posicion, equipo);
+            Jugador e = new Jugador(0,nombre, apellido, posicion, equipo);
+            
             jugadorLogica.NuevoJugador(e);
             
-            ModeloFormBasico modelo = new ModeloFormBasico("Estadio agregado correctamente!");
+            ModeloFormBasico modelo = new ModeloFormBasico("Jugador agregado correctamente!");
             
             request.setAttribute("modelo", modelo);
             
@@ -122,16 +130,36 @@ public class JugadorControlador extends HttpServlet {
         try
         {
             String nombre, apellido, posicion;
-            Equipo equipo = null;
+            Integer idequipo = null,idJugador;
         
             nombre = request.getParameter("txtNombre");
             apellido = request.getParameter("txtApellido");
             posicion = request.getParameter("txtPosicion");
+            idJugador = Integer.parseInt(request.getParameter("hiddenIdJugador"));
             
-            Jugador e = new Jugador(0, nombre, apellido, posicion, equipo);
+            try {
+                idequipo = Integer.parseInt(request.getParameter("ddlEquipo"));
+            }
+            catch (NumberFormatException ex) {
+                throw new Exception("El equipo seleccionado no es válido.");
+            }
+            
+            Equipo equipo = new Equipo();
+            equipo.setIdEquipo(idequipo);
+            
+            Jugador player = new Jugador(idJugador, nombre, apellido, posicion, equipo);
            
-            //volvemos a enviar el objeto a la vista.
-            request.setAttribute("jugador",e);
+            jugadorLogica.ActualizarJugador(player);
+            
+            ModeloFormBasico modelo = new ModeloFormBasico("Jugador actualizado correctamente!");
+            
+            request.setAttribute("modelo", modelo);
+            
+            //creamos un objeto vacio para que lleguen los valores limpios a la vista
+            request.setAttribute("jugador", player); 
+            
+            //enviamos tambien el id del equipo seleccionado
+            request.setAttribute("selectedEquipoId",player.getEquipoPertenece().getIdEquipo());
         }
         catch (Exception ex)
         {
@@ -156,17 +184,17 @@ public class JugadorControlador extends HttpServlet {
     {
         try
         {
-            //String nombreEstadio;
-            Integer IdJugador = Integer.parseInt(request.getParameter("idEstadio"));
-            //nombreEstadio = request.getParameter("nombreEstadio");
+            Integer IdJugador = Integer.parseInt(request.getParameter("idJugador"));
             
-            Jugador e = new Jugador();
-            //e.setNombreEstadio(nombreEstadio);
-            e.setIdJugador(IdJugador);
-            e = jugadorLogica.BuscarJugador(e);
+            Jugador player = new Jugador();
+            player.setIdJugador(IdJugador);
+            player = jugadorLogica.BuscarJugador(player);
 
             //cargamos el bean para que se muestren los datos en la vista
-            request.setAttribute("jugador", e);
+            request.setAttribute("jugador", player);
+            
+            //enviamos tambien el id del equipo seleccionado
+            request.setAttribute("selectedEquipoId",player.getEquipoPertenece().getIdEquipo());
         }
         catch (Exception ex)
         {
@@ -179,18 +207,16 @@ public class JugadorControlador extends HttpServlet {
         try
         {
             Integer idJugador = Integer.parseInt(request.getParameter("hiddenIdJugador"));
-//            String nombreEstadio;
-//            nombreEstadio = request.getParameter("txtNombreEstadio");
             
-            Jugador e = new Jugador();
-            e.setIdJugador(idJugador);
-            jugadorLogica.EliminarJugador(e);
+            Jugador player = new Jugador();
+           player.setIdJugador(idJugador);
+            jugadorLogica.EliminarJugador(player);
             
             ModeloFormBasico modelo = new ModeloFormBasico("Jugador eliminado correctamente!");
             
             request.setAttribute("modelo", modelo);
             
-            //Limpiamos el objeto equipo
+            //Limpiamos el objeto jugador
             request.setAttribute("jugador",new Jugador());
         }
         catch (Exception ex)

@@ -20,20 +20,28 @@
     <body>
         <form action="/WorldCupJavaWeb/Jugador" method="post" accept-charset="ISO-8859-1">
             <h1>Mantenimiento de Jugador</h1>
-            <input type="hidden" id="hiddenIdJugador" name="hiddenIdJugador" value="${jugador.IdJugador}">
+            <input type="hidden" id="hiddenIdJugador" name="hiddenIdJugador" value="${jugador.idJugador}">
             <table>
                 <tr>
-                    <td>Nombre</td><td><input type="text" id="txtNombre" name="txtNombre" value="${jugador.Nombre}"/></td>
+                    <td>Nombre</td><td><input type="text" id="txtNombre" name="txtNombre" value="${jugador.nombre}"/></td>
                 </tr>
                 <tr>
-                    <td>Apellido</td><td><input type="text" id="txtApellido" name="txtApellido" value="${jugador.Apellido}"/></td>
+                    <td>Apellido</td><td><input type="text" id="txtApellido" name="txtApellido" value="${jugador.apellido}"/></td>
                 </tr>
                 <tr>
-                    <td>Posición</td><td><input type="text" id="txtPosicion" name="txtPosicion" value="${jugador.Posicion}"/></td>
+                    <td>Posición</td><td><input type="text" id="txtPosicion" name="txtPosicion" value="${jugador.posicion}"/></td>
+                </tr>
+                <tr>
+                    <td>Equipo</td><td><select id="ddlEquipo" name="ddlEquipo">
+                            <c:forEach items="${equipos}" var="e" varStatus="count">
+                                <option value="${e.idEquipo}" <c:if test="${selectedEquipoId == e.idEquipo}">selected</c:if> >${e.pais}</option>
+                            </c:forEach>
+                                
+                        </select></td>
                 </tr>
             </table>
                     <c:choose >
-                        <c:when test="${equipo.pais == null}">
+                        <c:when test="${jugador.idJugador == null || jugador.idJugador == 0}">
                             <input type="submit" name="accion" id="btnGuardar" value="Guardar"/>
                         </c:when>
                             <c:otherwise>

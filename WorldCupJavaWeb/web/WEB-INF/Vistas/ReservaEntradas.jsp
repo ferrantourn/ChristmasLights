@@ -21,17 +21,22 @@
                 <tr>
                     <td>Seleccione partido</td><td><select id="ddlPartidos" name="ddlPartidos">
                             <c:forEach items="${partidos}" var="p">
-                                <option value="${p.idPartido}">${p.idPartido}</option></c:forEach>
-                            </select></td>
-                    </tr>
-                    <tr>
-                        <td>Ingrese cedula</td><td><input type="text" name="txtCedula"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><input type="submit" value="Reservar" name="accion"></td>
-                    </tr>
-                </table>
-            </form>
+                                <option value="${p.idPartido}">
+                                    <c:forEach items="${p.equipos}" var="e">
+                                    ${e.pais}&nbsp;
+                                </c:forEach>
+                                </option>
+                        </c:forEach>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Ingrese cedula</td><td><input type="text" name="txtCedula"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Reservar" name="accion"></td>
+                </tr>
+            </table>
+        </form>
         <c:if test="${reserva.idReserva != null && reserva.idReserva != 0}">
             <p>Su numero de reserva es: &nbsp; ${reserva.idReserva}</p>
             <p>Guarde este numero para su futura referencia.</p>
@@ -40,6 +45,7 @@
         <p>${modelo.mensaje}</p>
         <c:if test="${modelo.descErrorInterno != null && modelo.descErrorInterno != ''}">
             <p>Error Interno: &nbsp; ${modelo.descErrorInterno}</p>
-        </c:if>                        
+        </c:if>     
+            <p><a href="Home">Volver</a></p>
     </body>
 </html>
