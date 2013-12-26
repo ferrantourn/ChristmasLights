@@ -22,6 +22,11 @@ public class FabricaDatos  {
         return EstadioDatos.getInstancia();
     }
     
+    public static IJugadorDatos getJugadorDatos ()
+    {
+        return JugadorDatos.getInstancia();
+    }
+    
     public static IUsuarioDatos getUsuarioDatos ()
     {
         return UsuarioDatos.getInstancia();
