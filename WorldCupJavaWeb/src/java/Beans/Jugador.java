@@ -26,6 +26,11 @@ public class Jugador {
         this.Posicion=posicion;
   
     }
+    
+    public Jugador()
+        {}
+  
+   
 
     /**
      * @return the IdJugador

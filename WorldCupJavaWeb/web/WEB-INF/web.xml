@@ -20,6 +20,11 @@
         <servlet-name>EquiposControlador</servlet-name>
         <servlet-class>servlets.EquiposControlador</servlet-class>
     </servlet>
+        <servlet>
+        <servlet-name>JugadorControlador</servlet-name>
+        <servlet-class>servlets.JugadorControlador</servlet-class>
+        <multipart-config/>
+    </servlet>
     <servlet>
         <servlet-name>EstadiosControlador</servlet-name>
         <servlet-class>servlets.EstadiosControlador</servlet-class>

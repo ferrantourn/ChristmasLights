@@ -17,6 +17,11 @@ public class FabricaLogica {
         return EquiposLogica.getInstancia();
     }
     
+    public static IJugadorLogica getJugadorLogica ()
+    {
+        return JugadorLogica.getInstancia();
+    }
+    
     public static IEstadioLogica getEstadioLogica ()
     {
         return EstadioLogica.getInstancia();
