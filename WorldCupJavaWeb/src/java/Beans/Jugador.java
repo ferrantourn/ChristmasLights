@@ -17,9 +17,15 @@ public class Jugador {
     private String Posicion;
     private Equipo EquipoPertenece;
 
-    public Jugador(int IdJugador, String nombre, String apellido, String posicion, Equipo equipoAux) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }//Nótese que el netbeans me generó este constructor. No estoy seguro si es correcto
+    public Jugador(int IdJugador, String nombre, String apellido, String posicion, Equipo equipo) {
+        
+        this.Nombre=nombre;
+        this.IdJugador=IdJugador;
+        this.Apellido=apellido;
+        this.EquipoPertenece=equipo;
+        this.Posicion=posicion;
+  
+    }
 
     /**
      * @return the IdJugador
