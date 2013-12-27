@@ -41,4 +41,9 @@ public class FabricaDatos  {
     {
         return PartidosDatos.getInstancia();
     }
+    
+    public static IConsultasDatos getConsultasDatos ()
+    {
+        return ConsultasDatos.getInstancia();
+    }
 }

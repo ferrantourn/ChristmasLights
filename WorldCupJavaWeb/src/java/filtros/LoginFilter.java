@@ -114,7 +114,7 @@ public class LoginFilter implements Filter {
         catch (Exception ex)
         {
             //modelo = (ModeloFormBasico)request.getAttribute("modelo");
-            modelo.setMensaje("Error: Se produjo un error al hacer login.");
+            modelo.setMensaje("Error: Se produjo un error en la aplicación.");
             modelo.setDescErrorInterno(ex.getMessage());
             request.setAttribute("modelo", modelo);
            RequestDispatcher despachador = request.getRequestDispatcher("error.jsp");

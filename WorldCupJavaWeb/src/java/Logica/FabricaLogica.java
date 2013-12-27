@@ -40,4 +40,9 @@ public class FabricaLogica {
     {
         return PartidosLogica.getInstancia();
     }
+     
+      public static IConsultasLogica getConsultasLogica ()
+    {
+        return ConsultasLogica.getInstancia();
+    }
 }

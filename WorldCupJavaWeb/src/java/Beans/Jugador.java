@@ -16,6 +16,7 @@ public class Jugador {
     private String Apellido;
     private String Posicion;
     private Equipo EquipoPertenece;
+    private int totalGoles;
     
     public Jugador(int IdJugador, String nombre, String apellido, String posicion, Equipo equipo) {
         
@@ -104,6 +105,20 @@ public class Jugador {
      */
     public void setEquipoPertenece(Equipo EquipoPertenece) {
         this.EquipoPertenece = EquipoPertenece;
+    }
+
+    /**
+     * @return the totalGoles
+     */
+    public int getTotalGoles() {
+        return totalGoles;
+    }
+
+    /**
+     * @param totalGoles the totalGoles to set
+     */
+    public void setTotalGoles(int totalGoles) {
+        this.totalGoles = totalGoles;
     }
        
 }

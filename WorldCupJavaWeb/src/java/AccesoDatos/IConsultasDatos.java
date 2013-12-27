@@ -6,17 +6,15 @@
 
 package AccesoDatos;
 
-import Beans.Gol;
-import Beans.Partido;
+import Beans.Jugador;
 import java.util.ArrayList;
 
 /**
  *
  * @author Ferran
  */
-public interface IPartidosDatos {
+public interface IConsultasDatos {
 
-    ArrayList<Partido> ListarPartido() throws Exception;
-    void NuevoPartido(Partido p) throws Exception;
-    Gol IngresarGol(Gol g) throws Exception;
+    ArrayList<Jugador> TablaGoleadores() throws Exception;
+    
 }

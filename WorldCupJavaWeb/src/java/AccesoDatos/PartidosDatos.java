@@ -8,6 +8,7 @@ package AccesoDatos;
 
 import Beans.Equipo;
 import Beans.Estadio;
+import Beans.Gol;
 import Beans.Partido;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -53,6 +54,61 @@ public class PartidosDatos implements IPartidosDatos {
             throw ex;
         }
     }
+    
+    
+    @Override
+    public void NuevoPartido(Partido p) throws Exception
+    {
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try
+        {
+            
+            con = GetConnection();
+            //DEFINO CONSULTA
+            //---------------
+            st = con.prepareStatement("INSERT INTO partido ( Fecha,IdEstadio,IdEquipo1,IdEquipo2) "
+                    + "VALUES (?,?,?,?)");
+            
+            //DEFINO PARAMETROS
+            //----------------
+            st.setDate(1, (java.sql.Date)p.getFecha());
+            st.setInt(2, p.getEstadio().getIdEstadio());
+            st.setInt(3, p.getEquipos()[0].getIdEquipo());
+            st.setInt(4, p.getEquipos()[1].getIdEquipo());
+
+            
+            //EJECUTO CONSULTA
+            int rowsModified = st.executeUpdate(); 
+            if (rowsModified != 1)
+            {
+                throw new Exception("Error al crear el partido.");
+            }
+        }
+        catch (SQLException ex){
+            throw ex;
+        }
+        finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                
+                if (st != null) {
+                    st.close();
+                }
+                
+                if (con != null) {
+                    con.close();
+                }
+            }
+            catch (SQLException ex) {
+                throw ex;
+            }
+        }
+    }
+    
     
     @Override
     public ArrayList<Partido> ListarPartido() throws Exception
@@ -111,6 +167,75 @@ public class PartidosDatos implements IPartidosDatos {
                 try {
                     if (rs != null) {
                         rs.close();
+                    }
+                    
+                    if (st != null) {
+                        st.close();
+                    }
+                    
+                    if (con != null) {
+                        con.close();
+                    }
+                }
+                catch (SQLException ex) {
+                    throw ex;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+    
+    
+    @Override
+    public Gol IngresarGol(Gol g) throws Exception
+    {
+        try
+        {
+            Connection con = null;
+            PreparedStatement st = null;
+            ResultSet claves = null;
+            try
+            {
+                con = GetConnection();
+                
+                //DEFINO CONSULTA
+                //---------------
+                st = con.prepareStatement("INSERT INTO goles ( IdPartido,IdJugador,Minuto) "
+                        + "VALUES (?,?,?)",st.RETURN_GENERATED_KEYS);
+                
+                st.setInt(1, g.getPartido().getIdPartido());
+                st.setInt(2, g.getJugador().getIdJugador());
+                st.setInt(3, g.getMinuto());
+                
+                
+                //EJECUTO CONSULTA
+                int rowsModified = st.executeUpdate();
+                
+                if (rowsModified != 1)
+                {
+                    throw new Exception("Error al crear el gol.");
+                }
+                
+                //OBTENGO CLAVE AUTOGENERADA
+                claves = st.getGeneratedKeys();
+                if (claves.next()) {
+                    g.setIdGol(claves.getInt(1));
+                } else {
+                    throw new SQLException("Error al obtener el identificador del gol.");
+                }
+                
+                return g;
+            }
+            catch (SQLException ex){
+                throw ex;
+            }
+            finally {
+                try {
+                    if (claves != null) {
+                        claves.close();
                     }
                     
                     if (st != null) {

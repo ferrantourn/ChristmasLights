@@ -4,19 +4,17 @@
  * and open the template in the editor.
  */
 
-package AccesoDatos;
+package Logica;
 
-import Beans.Gol;
-import Beans.Partido;
+import Beans.Jugador;
 import java.util.ArrayList;
 
 /**
  *
  * @author Ferran
  */
-public interface IPartidosDatos {
+public interface IConsultasLogica {
 
-    ArrayList<Partido> ListarPartido() throws Exception;
-    void NuevoPartido(Partido p) throws Exception;
-    Gol IngresarGol(Gol g) throws Exception;
+    ArrayList<Jugador> TablaGoleadores() throws Exception;
+    
 }

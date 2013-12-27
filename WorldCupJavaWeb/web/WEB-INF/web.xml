@@ -24,6 +24,14 @@
         <filter-name>LoginFilter</filter-name>
         <servlet-name>JugadorControlador</servlet-name>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>PartidoControlador</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>GolControlador</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>EquiposControlador</servlet-name>
         <servlet-class>servlets.EquiposControlador</servlet-class>
@@ -44,6 +52,18 @@
     <servlet>
         <servlet-name>ReservasControlador</servlet-name>
         <servlet-class>servlets.ReservasControlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PartidoControlador</servlet-name>
+        <servlet-class>servlets.PartidoControlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GolControlador</servlet-name>
+        <servlet-class>servlets.GolControlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConsultasControlador</servlet-name>
+        <servlet-class>servlets.ConsultasControlador</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EquiposControlador</servlet-name>
@@ -80,6 +100,18 @@
     <servlet-mapping>
         <servlet-name>JugadorControlador</servlet-name>
         <url-pattern>/ListarJugadores</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PartidoControlador</servlet-name>
+        <url-pattern>/Partido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GolControlador</servlet-name>
+        <url-pattern>/Gol</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultasControlador</servlet-name>
+        <url-pattern>/Consultas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

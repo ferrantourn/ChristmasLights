@@ -17,7 +17,9 @@
         <title>Consulta Reservas</title>
     </head>
     <body>
-        <h1>Consulta de Reservas</h1>
+        <div id="wrapper">
+            <div id="header">
+                <h1>Consulta de Reservas</h1></div>
         <form action="/WorldCupJavaWeb/ConsultaReserva" method="post" accept-charset="ISO-8859-1">
             <h3>Ingrese su número de reserva</h3>
             <p><input type="text" id="txtReserva" name="txtReserva"><input type="submit" name="accion" id="btnBuscar" value="Buscar">
@@ -64,5 +66,6 @@
             </c:otherwise>
         </c:choose>
                   <p><a href="Home">Volver</a></p>
+        </div>
     </body>
 </html>

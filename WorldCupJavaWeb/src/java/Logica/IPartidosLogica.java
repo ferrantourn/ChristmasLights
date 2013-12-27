@@ -6,6 +6,7 @@
 
 package Logica;
 
+import Beans.Gol;
 import Beans.Partido;
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
  */
 public interface IPartidosLogica {
 
+    void NuevoPartido(Partido p) throws Exception;
     ArrayList<Partido> ListarPartidos() throws Exception;
-    
+    Gol IngresarGol (Gol g) throws Exception;
 }
