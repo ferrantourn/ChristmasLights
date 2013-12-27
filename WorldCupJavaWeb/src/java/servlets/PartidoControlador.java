@@ -15,7 +15,6 @@ import Logica.IEquiposLogica;
 import Logica.IEstadioLogica;
 import Logica.IPartidosLogica;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -112,7 +111,7 @@ public class PartidoControlador extends HttpServlet {
             Integer idequipo1,idequipo2;
         
             try {
-                DateFormat f = new SimpleDateFormat("d/M/YYYY");
+                SimpleDateFormat f = new SimpleDateFormat("d/M/yyyy");
                 //SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
                 fecha = f.parse(request.getParameter("txtFecha"));
             }
@@ -135,6 +134,11 @@ public class PartidoControlador extends HttpServlet {
             catch (NumberFormatException ex) {
                 throw new Exception("El estadio seleccionado no es válido.");
             }
+             
+             if (idequipo1 == idequipo2)
+             {
+                 throw new Exception("Equipo 1 y Equipo 2 deben ser paises distintos.");
+             }
 
             Partido p = new Partido();
             Equipo[] equipos = new Equipo[2];

@@ -4,15 +4,19 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="styles/style.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Estadios</title>
     </head>
     <body>
-        <h1>Estadios</h1>
+        <div id="wrapper">
+            <div id="header"><h1>Estadios</h1></div>
+             <div id="page" style="height:300px">
+                <div id="content" >
         <%--<form action="/WorldCupJavaWeb/Equipo" method="post" accept-charset="ISO-8859-1">
         <p>Buscar: &nbsp; <input type="text" id="txtBuscar" name="pais" >&nbsp;<input type="submit" value="Buscar" name="btnBuscar"></p>
         </form>--%>
-        <table>
+        <table id="table">
             <tr>
                 <th><th>NOMBRE</th><th>CAPACIDAD</th><th>TIPO CÉSPED</th><th></th>
             </tr>
@@ -32,6 +36,6 @@
         <c:if test="${!empty modelo.descErrorInterno}">
             <p>Error interno: modelo.descErrorInterno</p>
         </c:if>
-    </body>
+                </div></div></div>
     </body>
 </html>

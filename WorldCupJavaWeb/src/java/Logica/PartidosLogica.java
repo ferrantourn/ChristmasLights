@@ -7,10 +7,9 @@
 package Logica;
 
 import AccesoDatos.FabricaDatos;
-import AccesoDatos.IJugadorDatos;
 import AccesoDatos.IPartidosDatos;
+import Beans.Equipo;
 import Beans.Gol;
-import Beans.Jugador;
 import Beans.Partido;
 import java.util.ArrayList;
 
@@ -60,6 +59,7 @@ public class PartidosLogica implements IPartidosLogica {
         }
     }
     
+    @Override
     public Gol IngresarGol (Gol g) throws Exception
     {
         try
@@ -73,5 +73,45 @@ public class PartidosLogica implements IPartidosLogica {
         }
     }
     
+     @Override
+    public ArrayList<Partido> ListarProximosPartidos(Equipo e) throws Exception
+    {
+        try
+        {
+           IPartidosDatos datos = FabricaDatos.getPartidosDatos();
+           return datos.ListarProximosPartidos(e);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
     
+    @Override
+    public ArrayList<Partido> ListarPartidosJugados() throws Exception
+    {
+        try
+        {
+            IPartidosDatos datos = FabricaDatos.getPartidosDatos();
+           return datos.ListarPartidosJugados();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+    
+    @Override
+    public ArrayList<Gol> ListarGolesPartido (Partido p) throws Exception
+    {
+        try
+        {
+            IPartidosDatos datos = FabricaDatos.getPartidosDatos();
+            return datos.ListarGolesPartido(p);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 }

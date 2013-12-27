@@ -113,6 +113,18 @@
         <servlet-name>ConsultasControlador</servlet-name>
         <url-pattern>/Consultas</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultasControlador</servlet-name>
+        <url-pattern>/ProximosPartidos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultasControlador</servlet-name>
+        <url-pattern>/PartidosJugados</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultasControlador</servlet-name>
+        <url-pattern>/GolesPartido</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

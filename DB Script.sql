@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `2014worldcup`.`goles` (
 	CONSTRAINT fk_golesPartido FOREIGN KEY (IdPartido)
 	REFERENCES partido(IdPartido),
 	CONSTRAINT fk_golesJugador FOREIGN KEY (IdJugador)
-	REFERENCES partido(IdPartido)
+	REFERENCES jugador(IdJugador)
 )  ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
 
@@ -147,8 +147,8 @@ INSERT INTO estadio (NombreEstadio, Capacidad, TipoCesped) VALUES ('Fonte Nova',
 -- PARTIDOS
 INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-24', 1,1,2);
 INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-25', 1,3,4);
-INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-24', 1,5,6);
-INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2013-12-25', 1,7,8);
+INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2014-06-24', 1,5,6);
+INSERT INTO partido (Fecha, IdEstadio, IdEquipo1,IdEquipo2) VALUES ('2014-06-25', 1,7,8);
 
 -- JUGADORES
 INSERT INTO jugador (Nombre,Apellido,Posicion,IdEquipo) values ('Luis','Suarez','Delantero',1);

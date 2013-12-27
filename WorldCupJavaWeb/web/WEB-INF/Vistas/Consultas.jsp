@@ -1,7 +1,7 @@
 <%-- 
     Document   : TablaGoleadores
     Created on : Dec 27, 2013, 1:06:48 AM
-    Author     : Ferran
+    Author     : Yanick
 --%>
 
 <jsp:useBean id="modelo" type="Beans.ModeloFormBasico" scope="request" >
@@ -14,13 +14,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="styles/style.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tabla de Goleadores</title>
     </head>
     <body>
+        <div id="wrapper"><div id="header">
         <h1>Tabla de goleadores</h1>
-       
-        <table>
+       </div>
+            <div id="page" style="height:300px">
+                <div id="content" >
+        <table id="table">
             <tr>
                 <th>TOTAL GOLES<th>NOMBRE</th><th>APELLIDO</th>
             </tr>
@@ -39,6 +43,8 @@
         <c:if test="${!empty modelo.descErrorInterno}">
             <p>Error interno: modelo.descErrorInterno</p>
         </c:if>
+                </div></div>
+        </div>
     </body>
-    </body>
+    
 </html>

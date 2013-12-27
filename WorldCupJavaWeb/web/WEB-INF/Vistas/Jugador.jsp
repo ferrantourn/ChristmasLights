@@ -14,14 +14,18 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="styles/style.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edición de Jugadores</title>
     </head>
     <body>
+        <div id="wrapper">
         <form action="/WorldCupJavaWeb/Jugador" method="post" accept-charset="ISO-8859-1">
-            <h1>Mantenimiento de Jugador</h1>
+            <div id="header"><h1>Mantenimiento de Jugador</h1></div>
+            <div id="page" style="height:300px">
+                <div id="content" >
             <input type="hidden" id="hiddenIdJugador" name="hiddenIdJugador" value="${jugador.idJugador}">
-            <table>
+            <table id="table">
                 <tr>
                     <td>Nombre</td><td><input type="text" id="txtNombre" name="txtNombre" value="${jugador.nombre}"/></td>
                 </tr>
@@ -54,8 +58,10 @@
             <c:if test="${modelo.descErrorInterno != null && modelo.descErrorInterno != ''}">
                 <p>Error Interno: &nbsp; ${modelo.descErrorInterno}</p>
             </c:if>
-                
+                </div></div>
         </form>
             <p><a href="ListarJugadores">Volver</a></p>
+            
+</div>
     </body>
 </html>

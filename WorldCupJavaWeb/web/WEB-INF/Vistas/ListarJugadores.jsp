@@ -1,7 +1,7 @@
 <%-- 
     Document   : ListarJugadores
     Created on : Dec 26, 2013, 6:26:32 PM
-    Author     : Ferran
+    Author     : Yanick
 --%>
 
 <jsp:useBean id="modelo" type="Beans.ModeloFormBasico" scope="request" >
@@ -14,13 +14,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="styles/style.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Jugadores</title>
     </head>
     <body>
-        <h1>Jugadores</h1>
-       
-        <table>
+        <div id="wrapper">
+            <div id="header"><h1>Jugadores</h1></div>
+        <div id="page" style="height:300px">
+                <div id="content" >
+        <table id="table">
             <tr>
                 <th><th>NOMBRE</th><th>APELLIDO</th><th>POSICION</th>
             </tr>
@@ -40,6 +43,6 @@
         <c:if test="${!empty modelo.descErrorInterno}">
             <p>Error interno: modelo.descErrorInterno</p>
         </c:if>
-    </body>
+                </div></div></div>
     </body>
 </html>

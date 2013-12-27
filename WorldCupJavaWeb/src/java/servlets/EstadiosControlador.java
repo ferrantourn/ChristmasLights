@@ -105,9 +105,9 @@ public class EstadiosControlador extends HttpServlet {
         String fotoUrl = "";
         try
         {
-            //nombre = r.getAttribute("foto");
-            //if (nombre != null && !nombre.equals("")){
-                //GUARDAMOS LA IMAGEN
+            //GUARDAMOS LA IMAGEN
+            //-------------------
+            if (r.getPart("foto").getSize() > 0 ){
                 BufferedImage foto = ImageIO.read(r.getPart("foto").getInputStream());
                 if (foto != null)
                 {
@@ -121,7 +121,7 @@ public class EstadiosControlador extends HttpServlet {
                     //request.setAttribute("foto", "images/" + nombre + ".png");
                     fotoUrl = "images/" + nombre + ".png";
                 }
-            //}
+            }
         }
         catch (IOException | IllegalStateException | ServletException ex)
         {
@@ -189,8 +189,15 @@ public class EstadiosControlador extends HttpServlet {
             //OBTENEMOS LA FOTO
             //-----------------
             fotoUrl = ObtenerFoto(request,nombre);
+            Estadio e = new Estadio();
+            e.setIdEstadio(idEstadio);
+            e =  estadioLogica.BuscarEstadio(e);
+            e.setNombreEstadio(nombre);
+            e.setCapacidad(capacidad);
+            e.setCesped(TipoCesped.valueOf(tipoCesped));
+            if (!"".equals(fotoUrl))
+                e.setFotoUrl(fotoUrl);
             
-            Estadio e = new Estadio(idEstadio,nombre, capacidad, TipoCesped.valueOf(tipoCesped), fotoUrl);
             estadioLogica.ActualizarEstadio(e);
             
             ModeloFormBasico modelo = new ModeloFormBasico("Estadio actualizado correctamente!");

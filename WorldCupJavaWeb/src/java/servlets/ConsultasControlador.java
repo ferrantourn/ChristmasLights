@@ -6,12 +6,18 @@
 
 package servlets;
 
+import Beans.Equipo;
+import Beans.Gol;
 import Beans.Jugador;
 import Beans.ModeloFormBasico;
+import Beans.Partido;
+import Beans.mvGoles;
+import Beans.mvPartido;
 import Logica.FabricaLogica;
 import Logica.IConsultasLogica;
+import Logica.IEquiposLogica;
+import Logica.IPartidosLogica;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,15 +48,24 @@ public class ConsultasControlador extends HttpServlet {
             accion = request.getParameter("accion") != null ? request.getParameter("accion").toLowerCase().replace(" ", "") : "";
             metodo = request.getMethod().toUpperCase();
             
+            ModeloFormBasico m = new ModeloFormBasico();
+            request.setAttribute("modelo",m);
+            
             switch (accion) {
                 case "tabla":
                     if (metodo.equals("GET")) {
                         TablaGoleadores(request, response);
                     }
                     break;
-//                case "buscar":
-//                    //BuscarJugador(request, response);
-//                    break;
+                case "buscar":
+                    ProximosPartidos(request, response);
+                    break;
+                case "jugados":
+                    PartidosJugados(request, response);
+                    break;
+                    case "goles":
+                    GolesPartido(request, response);
+                    break;
             }
         }
         catch (Exception ex) {
@@ -58,6 +73,10 @@ public class ConsultasControlador extends HttpServlet {
             modelo.setMensaje("Error: Se produjo un error al realizar la consulta.");
             modelo.setDescErrorInterno(ex.getMessage());
             request.setAttribute("modelo", modelo);
+            
+            RequestDispatcher despachador = request.getRequestDispatcher("error.jsp");
+                        
+            despachador.forward(request, response);
         }
     }
     
@@ -74,6 +93,158 @@ public class ConsultasControlador extends HttpServlet {
             
             String vista = "WEB-INF/Vistas/Consultas.jsp";
             //vista += ("".equals(accion)) ? "ListarJugadores.jsp" : "Jugador.jsp";
+            RequestDispatcher despachador = request.getRequestDispatcher(vista);
+            
+            if (despachador != null) {
+                despachador.forward(request, response);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        
+    }
+    
+    private void ProximosPartidos(HttpServletRequest request, HttpServletResponse response) throws Exception
+    {
+        try
+        {
+            //Agregar un atributo equipos
+            IEquiposLogica lequipos = FabricaLogica.getEquiposLogica();
+            request.setAttribute("equipos", lequipos.ListarEquipos());
+            
+            
+            
+            //Obtenemos los partidos
+            IPartidosLogica lpartidos = FabricaLogica.getPartidosLogica();
+            Integer idequipo;
+            
+            if (request.getParameter("ddlEquipo") != null){
+                try {
+                    idequipo = Integer.parseInt(request.getParameter("ddlEquipo"));
+                }
+                catch (NumberFormatException ex) {
+                    throw new Exception("El identificador de equipo no es válido.");
+                }
+            }
+            else
+            {
+                idequipo = 0;
+            }
+            
+            Equipo e ;
+            if (idequipo != 0)
+            {
+                e = new Equipo();
+                e.setIdEquipo(idequipo);
+            }
+            else
+            {
+                e = null;
+            }
+            
+            ArrayList<Partido> proxPartidos = lpartidos.ListarProximosPartidos(e);
+            
+            //CARGAMOS EL MODELO DE LA VISTA
+            ArrayList<mvPartido> partidosVista = new ArrayList();
+            
+            for (Partido p : proxPartidos)
+            {
+                mvPartido mv= new mvPartido();
+                
+                mv.setEquipo1(p.getEquipos()[0].getPais());
+                mv.setEquipo2(p.getEquipos()[1].getPais());
+                mv.setFechaPartido(p.getFecha());
+                mv.setNombreEstadio(p.getEstadio().getNombreEstadio());
+                partidosVista.add(mv);
+            }
+            
+            request.setAttribute("partidos",partidosVista);
+            
+            String vista = "WEB-INF/Vistas/ProximosPartidos.jsp";
+            //vista += ("".equals(accion)) ? "ListarJugadores.jsp" : "Jugador.jsp";
+            RequestDispatcher despachador = request.getRequestDispatcher(vista);
+            
+            if (despachador != null) {
+                despachador.forward(request, response);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        
+    }
+    
+    private void PartidosJugados(HttpServletRequest request, HttpServletResponse response) throws Exception
+    {
+        try
+        {
+            //Obtenemos los partidos
+            IPartidosLogica lpartidos = FabricaLogica.getPartidosLogica();
+            ArrayList<Partido> proxPartidos = lpartidos.ListarPartidosJugados();
+            
+            //CARGAMOS EL MODELO DE LA VISTA
+            ArrayList<mvPartido> partidosVista = new ArrayList();
+            
+            for (Partido p : proxPartidos)
+            {
+                mvPartido mv= new mvPartido();
+                
+                mv.setEquipo1(p.getEquipos()[0].getPais());
+                mv.setEquipo2(p.getEquipos()[1].getPais());
+                mv.setFechaPartido(p.getFecha());
+                mv.setNombreEstadio(p.getEstadio().getNombreEstadio());
+                mv.setGolesEquipo1(p.getEquipos()[0].getGoles());
+                mv.setGolesEquipo2(p.getEquipos()[1].getGoles());
+                mv.setIdPartido(p.getIdPartido());
+
+                partidosVista.add(mv);
+            }
+           
+            request.setAttribute("partidos",partidosVista);
+            
+            String vista = "WEB-INF/Vistas/PartidosJugados.jsp";
+            RequestDispatcher despachador = request.getRequestDispatcher(vista);
+            
+            if (despachador != null) {
+                despachador.forward(request, response);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        
+    }
+    
+    private void GolesPartido(HttpServletRequest request, HttpServletResponse response) throws Exception
+    {
+        try
+        {
+            //Obtenemos los partidos
+            IPartidosLogica lpartidos = FabricaLogica.getPartidosLogica();
+            int idPartido = Integer.parseInt(request.getParameter("idPartido"));
+            Partido p = new Partido();
+            p.setIdPartido(idPartido);
+            ArrayList<Gol> golesPartido = lpartidos.ListarGolesPartido(p);
+            
+            ArrayList<mvGoles> goles = new ArrayList();
+            for (Gol g : golesPartido)
+            {
+                mvGoles golVista = new mvGoles();
+                golVista.setJugadorApellido(g.getJugador().getApellido());
+                golVista.setJugadorNombre(g.getJugador().getNombre());
+                golVista.setMinuto(g.getMinuto());
+                golVista.setNombreEquipo(g.getJugador().getEquipoPertenece().getPais());
+                
+                goles.add(golVista);
+            }
+            
+            request.setAttribute("goles",goles);
+            
+            String vista = "WEB-INF/Vistas/GolesPartido.jsp";
             RequestDispatcher despachador = request.getRequestDispatcher(vista);
             
             if (despachador != null) {

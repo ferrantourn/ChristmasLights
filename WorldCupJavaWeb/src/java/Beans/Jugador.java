@@ -19,13 +19,11 @@ public class Jugador {
     private int totalGoles;
     
     public Jugador(int IdJugador, String nombre, String apellido, String posicion, Equipo equipo) {
-        
         this.Nombre=nombre;
         this.IdJugador=IdJugador;
         this.Apellido=apellido;
         this.EquipoPertenece=equipo;
         this.Posicion=posicion;
-  
     }
     
     public Jugador()

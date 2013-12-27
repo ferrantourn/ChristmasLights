@@ -13,6 +13,7 @@ public class Equipo {
     private String pais;
     private String entrenador;
     private boolean cabezaSerie;
+    private int goles;
  
     public Equipo (){}
     
@@ -83,6 +84,20 @@ public class Equipo {
      */
     public void setIdEquipo(int idEquipo) {
         this.idEquipo = idEquipo;
+    }
+
+    /**
+     * @return the goles
+     */
+    public int getGoles() {
+        return goles;
+    }
+
+    /**
+     * @param goles the goles to set
+     */
+    public void setGoles(int goles) {
+        this.goles = goles;
     }
 
     

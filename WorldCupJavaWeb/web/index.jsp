@@ -20,15 +20,15 @@
             
                 <div id="menu">
                 <ul>
-                    <li><a href="/WorldCupJavaWeb/" >Partidos ya jugados</a></li>
-                    <li><a href="/WorldCupJavaWeb/" >Próximos partidos</a></li>
+                    <li><a href="/WorldCupJavaWeb/PartidosJugados?accion=jugados" >Partidos jugados</a></li>
+                    <li><a href="/WorldCupJavaWeb/ProximosPartidos?accion=buscar" >Próximos partidos</a></li>
                     <li><a href="/WorldCupJavaWeb/Consultas?accion=tabla">Tabla de goleadores</a></li>
                 </ul>
             </div>
             <div id="page">
                 <div id="content">
                     <h3>Login</h3>
-                    
+                    <div style='float:left'>
                     <form action="/WorldCupJavaWeb/Home" method="post" accept-charset="ISO-8859-1">
                         <table>
                             <tr>
@@ -54,6 +54,8 @@
                             </tr>
                         </table>
                     </form>
+                        </div>
+                    <div style=" float:right; background-repeat: no-repeat; background-image:url('styles/images/images.jpg'); width: 150px;height:200px " />
                 </div>
             </div>
             

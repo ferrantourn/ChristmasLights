@@ -20,7 +20,7 @@ public class Partido {
     {
         setIdPartido(idPartido);
         setEquipos(equipos);
-        setFecha(Fecha);
+        setFecha(f);
         setEstadio(estadio);
     }
     

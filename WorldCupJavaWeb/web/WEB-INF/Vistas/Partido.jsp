@@ -1,7 +1,7 @@
 <%-- 
     Document   : Partido
     Created on : Dec 26, 2013, 9:32:23 PM
-    Author     : Ferran
+    Author     : Yanick
 --%>
 
 
@@ -15,12 +15,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="styles/style.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edición de Partidos</title>
     </head>
     <body>
+        <div id="wrapper"><div id="header"> <h1>Mantenimiento de Partidos</h1></div>
+            <div id="page" style="height:300px">
+                <div id="content" >
         <form action="/WorldCupJavaWeb/Partido" method="post" accept-charset="ISO-8859-1">
-            <h1>Mantenimiento de Partidos</h1>
+            
+             
             <input type="hidden" id="hiddenIdPartido" name="hiddenIdPartido" value="${partido.idPartido}">
             <table>
                 <tr>
@@ -66,5 +71,6 @@
             
         </form>
         <p><a href="Home">Volver</a></p>
+                </div></div></div>
     </body>
 </html>

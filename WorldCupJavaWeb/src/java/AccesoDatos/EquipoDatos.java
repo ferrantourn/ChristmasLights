@@ -265,7 +265,7 @@ public class EquipoDatos implements IEquiposDatos{
             //DEFINO CONSULTA
             //---------------
             st = con.prepareStatement("UPDATE equipo SET Pais = ?, Entrenador = ?, CabezaSerie = ?"
-                    + "WHERE IdEquipo = ?");
+                    + " WHERE IdEquipo = ?");
             
             //DEFINO PARAMETROS
             //----------------
